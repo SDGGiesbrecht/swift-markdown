@@ -31,7 +31,7 @@ let package = Package(
                 .product(name: "cmark-gfm", package: cmarkPackageName),
                 .product(name: "cmark-gfm-extensions", package: cmarkPackageName),
             ]),
-        .executableTarget(
+        .target(
             name: "markdown-tool",
             dependencies: [
                 "Markdown",
@@ -51,8 +51,8 @@ let package = Package(
 if ProcessInfo.processInfo.environment["SWIFTCI_USE_LOCAL_DEPS"] == nil {
     // Building standalone, so fetch all dependencies remotely.
     package.dependencies += [
-        .package(url: "https://github.com/apple/swift-cmark.git", .branch("gfm")),
-        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "1.0.1")),
+        .package(url: "https://github.com/SDGGiesbrecht/swift-cmark", .exact(Version(0, 50800, 0))),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.1"),
     ]
 } else {
     // Building in the Swift.org CI system, so rely on local versions of dependencies.
